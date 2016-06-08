@@ -15,7 +15,8 @@
 <script type="text/javascript" src="tabletop.js"></script>
 <!--<script type="text/javascript" src="backbone.tabletopSync.js"></script>-->
 <script type="text/javascript">
-$(document).ready(function(){ init(); });
+$(document).ready(function(){ init();
+	 });
 
   var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/17GY4aGz04u_eAxMk8vknROoXxQakhRarHZGYQXU38A8/pubhtml';
   var tabletop;
@@ -23,9 +24,7 @@ $(document).ready(function(){ init(); });
   function init() {
     Tabletop.init( { key: public_spreadsheet_url,
                      callback: showInfo,
-                     postProcess: function(){
-                     	$("#pretty tbody tr").first().addClass("active");
-                     } 
+                     parseNumbers: true 
                      });
   
 
@@ -41,22 +40,37 @@ $(document).ready(function(){ init(); });
         table.append(head);
         var header = $("<tr class='active'></tr>");
         for(var i = 0; i < column_names.length; i++) {
-          $("<th></th>").text(column_names[i]).appendTo(header);
+        if(i == 0 || i == 1 || i == 2){
+        		$("<th></th>").text(column_names[i]).appendTo(header);
+        	}
+        else {
+          $("<th class='text-center'></th>").text(column_names[i]).appendTo(header);
+         }
         }
         head.append(header);
+        header.prepend("<th>#</th>");
         
         var tbody = $("<tbody></tbody>");
         for(var i = 0; i < sheet.elements.length; i++) {
           var row = sheet.elements[i];
-          var html_row = $("<tr class='info2'></tr>");
+          var html_row = $("<tr class='info2'><td>"+ (i+1) +"</td></tr>");
           
           for(var j = 0; j < column_names.length; j++) {
             var column_name = column_names[j];
-            $("<td></td>").text(row[column_name]).appendTo(html_row);
-            
+            if(j == 0){
+            	$("<td></td>").text(row[column_name]).appendTo(html_row);
+            }
+            else if(j == 1 || j == 2){
+            	$("<td></td>").text(row[column_name]).prepend("<img src='flags/"+row[column_name]+".png' class='flag'>").appendTo(html_row);
+            }
+            else {
+            $("<td class='text-center'></td>").text(row[column_name]).appendTo(html_row);
+            }
           }
           
           tbody.append(html_row);
+         
+          
           
           // CSS Classes assigned to table rows
           tbody.find("tr").eq(0).removeClass("info2").addClass("success");
@@ -75,6 +89,11 @@ $(document).ready(function(){ init(); });
 <style>
 .logo {
 	height: 100%;
+}
+.flag {
+	display: inline;
+	width: 25px;
+	margin-right: 10px;
 }
 body {
 	background-image: url(bg-jumbo2.jpeg);
