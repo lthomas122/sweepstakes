@@ -13,13 +13,86 @@
 <!-- JS Files -->
 <script type="text/javascript" src="jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="tabletop.js"></script>
+<script type="text/javascript" src="bootstrap.min.js"></script>
 <!--<script type="text/javascript" src="backbone.tabletopSync.js"></script>-->
 <script type="text/javascript">
-$(document).ready(function(){ init();
+$(document).ready(function(){ init(); init2();
 	 });
 
   var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/17GY4aGz04u_eAxMk8vknROoXxQakhRarHZGYQXU38A8/pubhtml';
   var tabletop;
+ 
+function init2() {
+    Tabletop.init( { key: public_spreadsheet_url,
+                     callback: showInfo ,
+                      wanted: [ "Results" ],
+                      postProcess: function(elements) {
+                      elements["Team 1"] = elements["team1"];
+                      elements["Team 2"] = elements["team2"];},
+                      debug: true
+                     });
+                  function showInfo(sheets, tabletop) {
+       console.log(tabletop.sheets("Results").elements);
+        $.each( tabletop.sheets("Results").elements, function(i, results) {
+        if (results["1"].length !== 0)
+        var select = "  -  ";
+        
+        else
+        var select ="  V  ";
+        
+        if (i <= 35){
+          var cat_li = $('<div class="row fixture-rows"><div class="col-sm-5"><img src="flags/' + results["Team 1"] + '.png" style="display:block;margin: 10px auto;"><h3 class="text-center">' + results["Team 1"] + '</h3></div><div class="col-sm-2 scores"><h1 class="text-center">' + results["1"] + select + results["2"] + '</h1></div><div class="col-sm-5"><img src="flags/' + results["Team 2"] + '.png" style="display:block;margin: 10px auto;"><h3 class="text-center">' + results["Team 2"] + '</h3></div><div>');
+          
+          cat_li.appendTo("#results");
+         }
+         else {
+         	var cat_li = $('<div class="row fixture-rows"><div class="col-sm-5"><h3 class="text-center">' + results["Team 1"] + '</h3></div><div class="col-sm-2 scores"><h1 class="text-center">' + results["1"] + select + results["2"] + '</h1></div><div class="col-sm-5"><h3 class="text-center">' + results["Team 2"] + '</h3></div><div>');
+          
+          cat_li.appendTo("#results");
+         }
+        });
+        }
+   /* function showInfo(sheets, tabletop) {
+        var sheet = sheets['Results'];
+       	var column_names = sheet.column_names;
+            
+        var article = $("#results");
+        
+        var line = $("<div class='row'></div>");
+        
+        for(var i = 0; i < sheet.elements.length; i++) {
+          var row = sheet.elements[i];
+          for(var j = 0; j < column_names.length; j++) {
+          //var match = $("<div class='col-xs-12'></div>");
+          var team1 = $("<div class='col-xs-5'></div>");
+          var team2 = $("<div class='col-xs-5'></div>");
+        
+          var c_n4 = column_names[4];
+          
+          $("<h3 class='text-center'></h3>").text(row[c_n4]).appendTo(team1);
+          
+          
+          var score1 = column_names[5];
+          var score2 = column_names[6];
+          
+          //if (score1.length != -1)
+          	var score = $("<h2 class='text-center'>"+ row[score1] +"  -  "+ row[score2] +"</h2>");
+         // else 
+          	//var score = $("<h2 class='text-center'>V</h2>");
+          
+          var result = $("<div class='col-xs-2'></div>").append(score);
+          
+          var c_n7 = column_names[7];
+          
+          $("<h3 class='text-center'></h3>").text(row[c_n7]).appendTo(team2);
+          }
+		line.append(team1);
+		line.append(result);
+		line.append(team2);
+        }
+        article.append(line);
+      };*/
+ }; 
  
   function init() {
     Tabletop.init( { key: public_spreadsheet_url,
@@ -95,10 +168,29 @@ $(document).ready(function(){ init();
 	width: 25px;
 	margin-right: 10px;
 }
+.fixture-rows {
+	padding: 15px 0;
+}
+.scores {
+	padding: 5px 0 15px;
+	background: rgba(0,0,0,0.5);
+}
+#results, #leaderboard {
+	/*background: #28415b;*/
+	background: rgba(0,0,0,0.5);
+	width: 100%;
+}
+#leaderboard {
+	box-shadow: 0px -30px 120px 40px rgba(0,0,0,0.5);
+	overflow-x: scroll;
+}
+#leaderboard table {
+	margin: 0 auto;
+}
 body {
 	background-image: url(bg-jumbo2.jpeg);
 	background-position: center;
-	background-size: 100% auto;
+	background-size: cover;
 	background-attachment: fixed;
 	padding-top: 80px;
 }
@@ -120,8 +212,8 @@ body {
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Players <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Tables</a></li>
+        <li><a href="#leaderboard">Leaderboard<span class="sr-only">(current)</span></a></li>
+        <li><a href="#results">Fixtures/Results</a></li>
         <!--<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -140,10 +232,10 @@ body {
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
-      </form> -->
+      </form> 
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
-      </ul>
+      </ul>-->
     </div>
   </div>
 </nav>
@@ -157,13 +249,17 @@ body {
   <p><a href="#leaderboard" class="btn btn-primary btn-lg">View Table</a></p>
 
 </div>
-<div id="leaderboard" style="margin-top: 50vh; background:rgba(255,255,255,0.7); width: 100%;" class="container">
-	<h1 class="text-center" style="color:#333; padding: 20px;">Leaderboard</h1>
+<div id="leaderboard" style="margin-top: 50vh;" class="container">
+	<h1 class="text-center" style="padding: 20px;">Leaderboard</h1>
 
 <table class="table table-striped table-hover" id="pretty">
 	<!-- Content is dynamically parsed by tabletop -->
 </table>
 
+</div>
+
+<div class="container" id="results">
+	<h1 class="text-center" style="padding: 20px;">Results and Fixtures</h1>
 </div>
 <!--
 <script>
