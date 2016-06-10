@@ -52,10 +52,10 @@ function init2() {
         	// Extra Time or Penalty Notification
         	console.log(results["ET?"]);
         	
-        	if (results["ET?"] == 1)
-        	var ET_pen = "<h2>AET</h2>";
-        	else if (results["Pen W"].length !== 0)
-        	var ET_pen = "<h2>PENS</h2>";
+        	if (results["Pen W"].length !== 0)
+        	var ET_pen = "<h2 class='text-center'>PENS</h2>";
+                else if (results["ET?"] == 1)
+        	var ET_pen = "<h2 class='text-center'>AET</h2>";
         	else
         	var ET_pen = "";
         	
