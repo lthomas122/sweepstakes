@@ -121,7 +121,7 @@ function init2() {
                 else 
                 var x = 3, p = 3;
                 
-          var cat_li = $('<div class="row fixture-rows"><div class="col-sm-5"><img src="flags/' + results["Team 1"] + '.png" style="display:block;margin: 5px auto;"><h3 class="text-center">' + results["Team 1"] + winner[x] + '</h3></div><div class="col-sm-2 scores"><h1 class="text-center">' + results["1"] + select + results["2"] + '</h1>' +  ET_pen + '</div><div class="col-sm-5"><img src="flags/' + results["Team 2"] + '.png" style="display:block;margin: 5px auto;"><h3 class="text-center">' + results["Team 2"] + winner[p] + '</h3></div></div><div class="row match-row"><div class="col-sm-3 col-xs-0"></div><div class="col-sm-6 col-xs-12"><div class="col-xs-4"><h4 class="text-center">Kick Off:<br>' + time + '</h4></div><div class="col-xs-4"><h4 class="text-center">Date:<br>' + date + '</h4></div><div class="col-xs-4"><h4 class="text-center">Stadium:<br>' + venue + '</h4></div></div><div class="col-sm-3 col-xs-0"></div></div>');
+          var cat_li = $('<div class="row fixture-rows"><div class="col-sm-5 cols-xs-4"><img src="flags/' + results["Team 1"] + '.png" style="display:block;margin: 5px auto;"><h3 class="text-center hidden-xs">' + results["Team 1"] + winner[x] + '</h3><p class="text-center hidden-sm hidden-md hidden-lg">' + results["Team 1"] + winner[x] + '</p></div><div class="col-sm-2 col-xs-4 scores"><h1 class="text-center">' + results["1"] + select + results["2"] + '</h1>' +  ET_pen + '</div><div class="col-sm-5 cols-xs-4"><img src="flags/' + results["Team 2"] + '.png" style="display:block;margin: 5px auto;"><h3 class="text-center hidden-xs">' + results["Team 2"] + winner[p] + '</h3><p class="text-center hidden-sm hidden-md hidden-lg">' + results["Team 2"] + winner[p] + '</p></div></div><div class="row match-row"><div class="col-sm-3 col-xs-0"></div><div class="col-sm-6 col-xs-12"><div class="col-xs-4"><h4 class="text-center">Kick Off:<br>' + time + '</h4></div><div class="col-xs-4"><h4 class="text-center">Date:<br>' + date + '</h4></div><div class="col-xs-4"><h4 class="text-center">Stadium:<br>' + venue + '</h4></div></div><div class="col-sm-3 col-xs-0"></div></div>');
           
           cat_li.appendTo("#results");
         }
@@ -251,6 +251,7 @@ span[amber]{
 	margin: 0 auto;
 }
 body {
+	background: #375A7F;
 	padding-top: 80px;
 }
 .background-div-mob {
