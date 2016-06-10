@@ -65,9 +65,9 @@ function init2() {
     		else
     		var previous = i-1;
 
-		$.each(results[previous], function(key, value) {
+		$.each(tabletop.sheets("Results").elements[previous], function(key, value) {
         	if (key == "Date"){	
-        		alert("It's the " + value);
+        		value.text().appendTo("#results h1");
         	}
     		});
         
@@ -84,7 +84,7 @@ function init2() {
         	var x = 2, p = 2;
                 else 
                 var x = 3, p = 3;
-        	console.log(results["Team 1"]);
+        
           var cat_li = $('<div class="row fixture-rows"><div class="col-sm-5"><img src="flags/' + results["Team 1"] + '.png" style="display:block;margin: 10px auto;"><h3 class="text-center">' + results["Team 1"] + winner[x] + '</h3></div><div class="col-sm-2 scores"><h1 class="text-center">' + results["1"] + select + results["2"] + '</h1>' +  ET_pen + '</div><div class="col-sm-5"><img src="flags/' + results["Team 2"] + '.png" style="display:block;margin: 10px auto;"><h3 class="text-center">' + results["Team 2"] + winner[p] + '</h3></div><div>');
           
           cat_li.appendTo("#results");
