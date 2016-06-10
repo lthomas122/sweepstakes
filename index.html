@@ -59,8 +59,16 @@ function init2() {
         	else
         	var ET_pen = "";
         	
-        	var next = results["Date"].eq(i+1).text();
-        	alert("The Date is" + next);
+        	
+		if (i == 0)
+    		var previous = i;
+    		else
+    		var previous = i-1;
+
+		$.each(results[previous], function(key, value) {
+        		alert("It's the " + value["Date"] + key);
+    		});
+        
         	
         	// Winner Array
         	var winner = ["<span green>(W)</span>","<span red>(L)</span>", "<span amber>(D)</span>", "" ];
