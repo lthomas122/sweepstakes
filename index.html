@@ -25,73 +25,63 @@ $(document).ready(function(){ init(); init2();
 function init2() {
     Tabletop.init( { key: public_spreadsheet_url,
                      callback: showInfo ,
-                      wanted: [ "Results" ],
-                      postProcess: function(elements) {
-                      elements["Team 1"] = elements["team1"];
-                      elements["Team 2"] = elements["team2"];},
+                      wanted: [ "Results" , "Teams"],
                       debug: true
                      });
                   function showInfo(sheets, tabletop) {
-       console.log(tabletop.sheets("Results").elements);
-        $.each( tabletop.sheets("Results").elements, function(i, results) {
-        if (results["1"].length !== 0)
-        var select = "  -  ";
-        
+                  	
+                  		
+                  		 
+       
+       // Grab Every Cell in the Results worksheet
+        $.each( tabletop.sheets("Results").elements, function(i, results){
+        	//console.log(results);
+        if (results["1"].length !== 0) // Determine if the match has been played 
+        var select = "  -  ";							        
         else
         var select ="  V  ";
         
+        //  || (rankings.Team == results["Team 1"] || results["Team 2"]) -- Old
+        
+        //var teams = $.inArray(results["Team 1"],tabletop.sheets("Teams").elements);
+        
+        //console.log(tabletop.sheets("Teams").elements[0]);
+        
         if (i <= 35){
-          var cat_li = $('<div class="row fixture-rows"><div class="col-sm-5"><img src="flags/' + results["Team 1"] + '.png" style="display:block;margin: 10px auto;"><h3 class="text-center">' + results["Team 1"] + '</h3></div><div class="col-sm-2 scores"><h1 class="text-center">' + results["1"] + select + results["2"] + '</h1></div><div class="col-sm-5"><img src="flags/' + results["Team 2"] + '.png" style="display:block;margin: 10px auto;"><h3 class="text-center">' + results["Team 2"] + '</h3></div><div>');
+        	
+        	// Extra Time or Penalty Notification
+        	console.log(results["ET?"]);
+        	
+        	if (results["ET?"] == 1)
+        	var ET_pen = $('<h2>AET</h2>');
+        	else if (results["Pen W"].length !== 0)
+        	var ET_pen = $('<h2>PENS</h2>');
+        	else
+        	var ET_pen = "";
+        	
+        	// Winner Array
+        	var winner = ["<span green>(W)</span>","<span red>(L)</span>", "" ];
+        	
+        	// Winner Conditions
+        	if ((results["Pen W"] == 1)||(results["1"] > results["2"])) 
+        	var x = 0, p = 1;
+        	else if ((results["Pen W"] == 2)||(results["1"] < results["2"]))
+        	var x = 1, p = 0;
+        	else if ((results["ET?"].length !== 0)||(results["1"] == results["2"])||(results["1"].length !== 0))
+        	var x = 2, p = 2;
+        	console.log(results["Team 1"]);
+          var cat_li = $('<div class="row fixture-rows"><div class="col-sm-5"><img src="flags/' + results["Team 1"] + '.png" style="display:block;margin: 10px auto;"><h3 class="text-center">' + results["Team 1"] + winner[x] + '</h3></div><div class="col-sm-2 scores"><h1 class="text-center">' + results["1"] + select + results["2"] + '</h1>' +  ET_pen + '</div><div class="col-sm-5"><img src="flags/' + results["Team 2"] + '.png" style="display:block;margin: 10px auto;"><h3 class="text-center">' + results["Team 2"] + winner[p] + '</h3></div><div>');
           
           cat_li.appendTo("#results");
-         }
+        }
          else {
+         	
          	var cat_li = $('<div class="row fixture-rows"><div class="col-sm-5"><h3 class="text-center">' + results["Team 1"] + '</h3></div><div class="col-sm-2 scores"><h1 class="text-center">' + results["1"] + select + results["2"] + '</h1></div><div class="col-sm-5"><h3 class="text-center">' + results["Team 2"] + '</h3></div><div>');
           
           cat_li.appendTo("#results");
          }
         });
         }
-   /* function showInfo(sheets, tabletop) {
-        var sheet = sheets['Results'];
-       	var column_names = sheet.column_names;
-            
-        var article = $("#results");
-        
-        var line = $("<div class='row'></div>");
-        
-        for(var i = 0; i < sheet.elements.length; i++) {
-          var row = sheet.elements[i];
-          for(var j = 0; j < column_names.length; j++) {
-          //var match = $("<div class='col-xs-12'></div>");
-          var team1 = $("<div class='col-xs-5'></div>");
-          var team2 = $("<div class='col-xs-5'></div>");
-        
-          var c_n4 = column_names[4];
-          
-          $("<h3 class='text-center'></h3>").text(row[c_n4]).appendTo(team1);
-          
-          
-          var score1 = column_names[5];
-          var score2 = column_names[6];
-          
-          //if (score1.length != -1)
-          	var score = $("<h2 class='text-center'>"+ row[score1] +"  -  "+ row[score2] +"</h2>");
-         // else 
-          	//var score = $("<h2 class='text-center'>V</h2>");
-          
-          var result = $("<div class='col-xs-2'></div>").append(score);
-          
-          var c_n7 = column_names[7];
-          
-          $("<h3 class='text-center'></h3>").text(row[c_n7]).appendTo(team2);
-          }
-		line.append(team1);
-		line.append(result);
-		line.append(team2);
-        }
-        article.append(line);
-      };*/
  }; 
  
   function init() {
@@ -174,6 +164,21 @@ function init2() {
 .scores {
 	padding: 5px 0 15px;
 	background: rgba(0,0,0,0.5);
+}
+#results span {
+	font-size: 80%;
+	padding-left: 10px;
+	font-weight: 900;
+	margin-right: -10px;
+}
+span[green]{
+	color: #00bc8c;
+}
+span[red]{
+	color:#e74c3c;
+}
+#results h3{
+	/*margin-left: 10px;*/
 }
 #results, #leaderboard {
 	/*background: #28415b;*/
