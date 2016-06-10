@@ -65,8 +65,10 @@ function init2() {
     		else
     		var previous = i-1;
 
-		$.each(results.Date[previous], function(key, value) {
+		$.each(results[previous], function(key, value) {
+        	if (key == "STAGE2"){	
         		alert("It's the " + value);
+        	}
     		});
         
         	
