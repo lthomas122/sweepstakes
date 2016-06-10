@@ -32,13 +32,13 @@ $(window).on("hashchange", function () {
 
 $(document).ready(function(){ init(); init2(); init2();
 
-$("button.players").click(function(){
-	$("#teams").hide();
-	$("#pretty").stop().fadeIn(400);
+$(".players").on("click",function(){
+	$("#teams").find().hide();
+	$("#pretty").find().stop().fadeIn(400);
 });
-$("button.teams").click(function(){
-	$("#pretty").hide();
-	$("#teams").stop().fadeIn(400);
+$(".teams").on("click",function(){
+	$("#pretty").find().hide();
+	$("#teams").find().stop().fadeIn(400);
 });
 
 $(function() {
