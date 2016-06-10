@@ -16,6 +16,19 @@
 <script type="text/javascript" src="bootstrap.min.js"></script>
 <!--<script type="text/javascript" src="backbone.tabletopSync.js"></script>-->
 <script type="text/javascript">
+// The function actually applying the offset
+function offsetAnchor() {
+    if(location.hash.length !== 0) {
+        window.scrollTo(window.scrollX, window.scrollY - 100);
+    }
+    else if (location.hash == "#top"){}
+}
+
+// This will capture hash changes while on the page
+$(window).on("hashchange", function () {
+    offsetAnchor();
+});
+
 $(document).ready(function(){ init(); init2();
 
 $(function() {
@@ -277,7 +290,7 @@ hr { border-color: inherit }
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><img src="logo.png" class="logo"></a>
+      <a class="navbar-brand" href="#top"><img src="logo.png" class="logo"></a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
