@@ -17,6 +17,21 @@
 <!--<script type="text/javascript" src="backbone.tabletopSync.js"></script>-->
 <script type="text/javascript">
 $(document).ready(function(){ init(); init2();
+
+$(function() {
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
 	 });
 
   var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/17GY4aGz04u_eAxMk8vknROoXxQakhRarHZGYQXU38A8/pubhtml';
@@ -205,7 +220,7 @@ span[red]{
 	/*margin-left: 10px;*/
 }
 #results, #leaderboard {
-	/*background: #28415b;*/
+	background: #28415b;
 	background: rgba(0,0,0,0.5);
 	width: 100%;
 }
@@ -244,6 +259,7 @@ body {
 	background-position: center;
 	background-size: cover;
 	background-attachment: fixed;
+	z-index:-1;
 }
 </style>
 </head>
@@ -299,7 +315,7 @@ body {
   <br>
   <h4 style="padding: 10px 15%;">Welcome all to the Euro 2016 Sweepstake website.  Here you can keep up to date with all things football - through the highs and the lows.  Best of luck to you all!</h4>
   <br>
-  <p><a href="#leaderboard" class="btn btn-primary btn-lg">View Table</a></p>
+  <p><a href="#leaderboard" class="btn btn-primary btn-lg">View Leaderboard</a></p>
 
 </div>
 <div id="leaderboard" style="margin-top: 50vh;" class="container">
