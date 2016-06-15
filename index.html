@@ -95,10 +95,10 @@ function init3() {
           for(var j = 0; j < column_names.length; j++) {
             var column_name = column_names[j];
             if(j == 0){
-            	$("<td></td>").text(row[column_name]).appendTo(html_row);
+            	$("<td></td>").text(row[column_name]).prepend("<img src='flags/"+row[column_name]+".png' class='flag'>").appendTo(html_row);
             }
             else if(j == 1){
-            	$("<td></td>").text(row[column_name]).prepend("<img src='flags/"+row[column_name]+".png' class='flag'>").appendTo(html_row);
+            	$("<td></td>").text(row[column_name]).appendTo(html_row);
             }
             else {
             $("<td class='text-center'></td>").text(row[column_name]).appendTo(html_row);
@@ -112,8 +112,8 @@ function init3() {
           // CSS Classes assigned to table rows
           tbody.find("tr").eq(0).removeClass("info2").addClass("success");
           tbody.find("tr").eq(1).removeClass("info2").addClass("info");
-          tbody.find("tr").eq(10).removeClass("info2").addClass("warning");
-          tbody.find("tr").eq(11).removeClass("info2").addClass("danger");
+          tbody.find("tr").eq(22).removeClass("info2").addClass("warning");
+          tbody.find("tr").eq(23).removeClass("info2").addClass("danger");
           
           
         }
