@@ -33,7 +33,7 @@ $(window).on("hashchange", function () {
 $(document).ready(function(){ init(); init2(); init3();
 
 $("#players").click(function(){
-	if ( $("#teamboard").css('display') == 'none' ){
+	if ( $("#playerboard").css('display') == 'none' ){
 		$(this).removeClass("btn-primary").addClass("btn-info");
 		$("#team").removeClass("btn-info").addClass("btn-primary");
 	$("#teamboard").hide();
