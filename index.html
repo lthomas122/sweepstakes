@@ -34,8 +34,8 @@ $(document).ready(function(){ init(); init2(); init3();
 
 $("#players").click(function(){
 	if ( $("#playerboard").css('display') == 'none' ){
-		$("#team").removeClass("btn-info").addClass("btn-primary");
-		$("#players").removeClass("btn-primary").addClass("btn-info");
+		$("#players").toggleClass("inactive");
+		$("#team").toggleClass("inactive");
 	};
 	$("#teamboard").hide();
 	$("#playerboard").stop().fadeIn(400);
@@ -43,8 +43,8 @@ $("#players").click(function(){
 });
 $("#team").click(function(){
 	if ( $("#teamboard").css('display') == 'none' ){
-		$("#team").removeClass("btn-primary").addClass("btn-info");
-		$("#players").removeClass("btn-info").addClass("btn-primary");
+		$("#team").toggleClass("inactive");
+		$("#players").toggleClass("inactive");
 	};
 	$("#playerboard").hide();
 	$("#teamboard").stop().fadeIn(400);
@@ -354,6 +354,11 @@ body {
 	background: #375A7F;
 	padding-top: 80px;
 }
+a.inactive {
+	opacity: 0.5;
+	transition: opacity 0.2s;
+	-webkit-transition: opacity 0.2s;
+}
 .background-div-mob {
 	background: #1986D0;
 	background: -moz-linear-gradient(top, #6BDAF3 0%, #1986D0 60%,#375A7F 100%);
@@ -441,7 +446,7 @@ hr { border-color: inherit }
 </div>
 <div id="leaderboard" style="margin-top: 50vh;" class="container">
 	<h1 class="text-center" style="padding: 20px;">Leaderboard</h1>
-	<div><a href="javascript:void(0)" id="players" class="btn btn-info col-xs-6">Players</a><a href="javascript:void(0)" id="team" class="btn btn-primary col-xs-6">Teams</a></div>
+	<div><a href="javascript:void(0)" id="players" class="btn btn-info col-xs-6">Players</a><a href="javascript:void(0)" id="team" class="btn btn-primary inactive col-xs-6">Teams</a></div>
 <div id="playerboard">
 <table class="table table-striped table-hover" id="pretty">
 	<!-- Content is dynamically parsed by tabletop -->
