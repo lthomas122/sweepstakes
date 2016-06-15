@@ -30,7 +30,7 @@ $(window).on("hashchange", function () {
     offsetAnchor();
 });
 
-$(document).ready(function(){ init(); init2(); init2();
+$(document).ready(function(){ init(); init2(); init3();
 
 $("#players").click(function(){
 	$("#teamboard").hide();
@@ -438,7 +438,7 @@ hr { border-color: inherit }
 </table>
 </div>
 
-<div id="teamboard">
+<div id="teamboard" style="display:none;">
 <table class="table table-striped table-hover" id="teams">
 	<!-- Content is dynamically parsed by tabletop -->
 </table>
