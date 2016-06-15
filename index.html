@@ -33,20 +33,18 @@ $(window).on("hashchange", function () {
 $(document).ready(function(){ init(); init2(); init3();
 
 $("#players").click(function(){
-	if ($("#teamboard").is(":visible")){
-	$("#team").removeClass("active");
-	$(this).addClass("active");
+	
 	$("#teamboard").hide();
 	$("#playerboard").stop().fadeIn(400);
-	}
+	
 });
 $("#team").click(function(){
-	if ($("#playerboard").is(":visible")){
-	$("#team").removeClass("active");
-	$(this).addClass("active");
+	if ($("#players").hasClass("active")){
+		$(this).removeClass("active");
+	};
 	$("#playerboard").hide();
 	$("#teamboard").stop().fadeIn(400);
-	}
+	
 });
 
 $(function() {
