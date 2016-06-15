@@ -34,8 +34,8 @@ $(document).ready(function(){ init(); init2(); init3();
 
 $("#players").click(function(){
 	if ( $("#playerboard").css('display') == 'none' ){
-		$("#players").toggleClass("disabled");
-		$("#team").toggleClass("disabled");
+		$("#players").toggleClass("btn-info");
+		$("#team").toggleClass("btn-primary");
 	};
 	$("#teamboard").hide();
 	$("#playerboard").stop().fadeIn(400);
@@ -43,8 +43,8 @@ $("#players").click(function(){
 });
 $("#team").click(function(){
 	if ( $("#teamboard").css('display') == 'none' ){
-		$("#team").toggleClass("disabled");
-		$("#players").toggleClass("disabled");
+		$("#team").toggleClass("btn-info");
+		$("#players").toggleClass("btn-primary");
 	};
 	$("#playerboard").hide();
 	$("#teamboard").stop().fadeIn(400);
@@ -441,7 +441,7 @@ hr { border-color: inherit }
 </div>
 <div id="leaderboard" style="margin-top: 50vh;" class="container">
 	<h1 class="text-center" style="padding: 20px;">Leaderboard</h1>
-	<div><a href="javascript:void(0)" id="players" class="btn btn-default disabled col-xs-6">Players</a><a href="javascript:void(0)" id="team" class="btn btn-default col-xs-6">Teams</a></div>
+	<div><a href="javascript:void(0)" id="players" class="btn btn-info disabled col-xs-6">Players</a><a href="javascript:void(0)" id="team" class="btn btn-primary col-xs-6">Teams</a></div>
 <div id="playerboard">
 <table class="table table-striped table-hover" id="pretty">
 	<!-- Content is dynamically parsed by tabletop -->
