@@ -34,8 +34,8 @@ $(document).ready(function(){ init(); init2(); init3();
 
 $("#players").click(function(){
 	if ( $("#playerboard").css('display') == 'none' ){
-		$("#players").toggleClass("btn-info");
-		$("#team").toggleClass("btn-primary");
+		$("#team").removeClass("btn-info").addClass("btn-primary");
+		$("#players").removeClass("btn-primary").addClass("btn-info");
 	};
 	$("#teamboard").hide();
 	$("#playerboard").stop().fadeIn(400);
@@ -43,8 +43,8 @@ $("#players").click(function(){
 });
 $("#team").click(function(){
 	if ( $("#teamboard").css('display') == 'none' ){
-		$("#team").toggleClass("btn-info");
-		$("#players").toggleClass("btn-primary");
+		$("#team").removeClass("btn-primary").addClass("btn-info");
+		$("#players").removeClass("btn-info").addClass("btn-primary");
 	};
 	$("#playerboard").hide();
 	$("#teamboard").stop().fadeIn(400);
